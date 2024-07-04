@@ -180,6 +180,11 @@
                     $("#btnSendCode1").val("获取验证码");
                     $("#btnSendCode1").removeAttr("disabled");//启用按钮
                     alert("这个邮箱已经被使用了哦！");
+                } else if (result === "error") {
+                    window.clearInterval(InterValObj1);
+                    $("#btnSendCode1").val("获取验证码");
+                    $("#btnSendCode1").removeAttr("disabled");//启用按钮
+                    alert("后台未配置邮箱");
                 }
                 return false;
             },

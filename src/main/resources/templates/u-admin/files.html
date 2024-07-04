@@ -142,6 +142,16 @@
 <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
 <script>
 	$(function () {
+		// $('.card').dblclick(function () {
+		// let id = $(this).children("td").children("span").html();
+		// var location = window.location.href;
+		// let strings = location.split("?");
+		// if (id != ""){
+		// 	window.location.href = strings[0]+"?fId="+id;
+		// }else{
+		// 	return;
+		// }
+		// });
 		$('.folders').dblclick(function () {
 			let id = $(this).children("td").children("span").html();
 			var location = window.location.href;
@@ -323,6 +333,32 @@
 		]
 
 	});
+	// $(".card").contextMenu({
+	// 	width: 100, // width
+	// 	itemHeight: 30, // 菜单项height
+	// 	bgColor: "#fff", // 背景颜色
+	// 	color: "#333", // 字体颜色
+	// 	fontSize: 12, // 字体大小
+	// 	hoverBgColor: "#3498db", // hover背景颜色
+	// 	target: function(ele) { // 当前元素
+	// 		console.log(ele);
+	// 	},
+	// 	menu: [ // 菜单项
+	// 		{
+	// 			text: " 返回上一级",
+	// 			callback: function() {
+	// 				toPreFolder();
+	// 			}
+	// 		},
+	// 		{
+	// 			text: " 新建文件夹",
+	// 			callback: function() {
+	// 				addFolderElement();
+	// 			}
+	// 		}
+	// 	]
+	//
+	// });
 	$(".empty-space").contextMenu({
 		width: 100, // width
 		itemHeight: 30, // 菜单项height

@@ -41,7 +41,7 @@ spring:
   datasource:
     # 配置数据源
     username: root
-    password: 你需要修改此处
+    password: root
     url: jdbc:mysql://127.0.0.1:3306/moti-cloud?serverTimezone=Hongkong&useAffectedRows=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource

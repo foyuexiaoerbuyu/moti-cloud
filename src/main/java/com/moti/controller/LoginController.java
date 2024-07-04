@@ -25,7 +25,7 @@ import java.util.Map;
  * @Description 登录控制器
  * @Author xw
  * @Date 18:19 2020/2/25
- * @Param  * @param null
+ * @Param * @param null
  * @return
  **/
 @Controller
@@ -34,16 +34,16 @@ public class LoginController extends BaseController {
     private Logger logger = LogUtils.getInstance(LoginController.class);
 
     /**
+     * @return java.lang.String
      * @Description 免登陆用户入口，用于本地开发测试，上线运营为了安全请删除此方法
      * @Author xw
      * @Date 15:17 2020/2/26
      * @Param []
-     * @return java.lang.String
      **/
     @GetMapping("/admin")
-    public String adminLogin(){
+    public String adminLogin() {
         User user = userService.getUserByOpenId("123456");
-        logger.info("使用免登陆方式登录成功！"+user);
+        logger.info("使用免登陆方式登录成功！" + user);
         session.setAttribute("loginUser", user);
         return "redirect:/index";
     }
@@ -85,6 +85,7 @@ public class LoginController extends BaseController {
 
     /**
      * 用户登录
+     *
      * @param map 存储提示信息
      * @return java.lang.String
      * @author 莫提
@@ -95,9 +96,9 @@ public class LoginController extends BaseController {
         User userByEmail = userService.getUserByEmail(user.getEmail());
         if (userByEmail != null && userByEmail.getPassword().equals(user.getPassword())) {
             session.setAttribute("loginUser", userByEmail);
-            logger.info("登录成功！"+userByEmail);
+            logger.info("登录成功！" + userByEmail);
             return "redirect:/index";
-        }else{
+        } else {
             User user1 = userService.getUserByEmail(user.getEmail());
             String errorMsg = user1 == null ? "该邮箱尚未注册" : "密码错误";
             logger.info("登录失败！请确认邮箱和密码是否正确！");
@@ -122,19 +123,24 @@ public class LoginController extends BaseController {
             logger.error("发送验证码失败！邮箱已被注册！");
             return "exitEmail";
         }
-        logger.info("开始发送邮件.../n" + "获取的到邮件发送对象为:" + mailSender);
-        mailUtils = new MailUtils(mailSender);
-        String code = mailUtils.sendCode(email, userName, password);
-        session.setAttribute(email + "_code", code);
-        return "success";
+        try {
+            logger.info("开始发送邮件.../n" + "获取的到邮件发送对象为:" + mailSender);
+            mailUtils = new MailUtils(mailSender);
+            String code = mailUtils.sendCode(email, userName, password);//不想配置验证码的时候可以注释这行写一个默认的验证码
+            session.setAttribute(email + "_code", code);
+            return "success";
+        } catch (Exception e) {
+            logger.error("发送邮件失败！请检查邮箱配置" + e.getMessage());
+            return "error";
+        }
     }
 
     /**
+     * @return void
      * @Description 请求QQ登录
      * @Author xw
      * @Date 18:27 2020/2/25
      * @Param []
-     * @return void
      **/
     @GetMapping("/loginByQQ")
     public void login() {
@@ -148,11 +154,11 @@ public class LoginController extends BaseController {
     }
 
     /**
+     * @return java.lang.String
      * @Description QQ登录回调地址
      * @Author xw
      * @Date 18:27 2020/2/25
      * @Param []
-     * @return java.lang.String
      **/
     @GetMapping("/connection")
     public String connection() {
@@ -180,15 +186,15 @@ public class LoginController extends BaseController {
                     logger.info("用户的头像URI: " + userInfoBean.getAvatar().getAvatarURL100());
                     //设置用户信息
                     User user = userService.getUserByOpenId(openID);
-                    if (user == null){
+                    if (user == null) {
                         user = User.builder()
                                 .openId(openID).userName(removeNonBmpUnicode(userInfoBean.getNickname()))
                                 .imagePath(userInfoBean.getAvatar().getAvatarURL100()).
                                 registerTime(new Date()).build();
-                        if (userService.insert(user)){
+                        if (userService.insert(user)) {
                             logger.info("注册用户成功！当前注册用户" + user);
                             FileStore store = FileStore.builder().userId(user.getUserId()).build();
-                            if (fileStoreService.addFileStore(store) == 1){
+                            if (fileStoreService.addFileStore(store) == 1) {
                                 user.setFileStoreId(store.getFileStoreId());
                                 userService.update(user);
                                 logger.info("注册仓库成功！当前注册仓库" + store);
@@ -196,12 +202,12 @@ public class LoginController extends BaseController {
                         } else {
                             logger.error("注册用户失败！");
                         }
-                    }else {
+                    } else {
                         user.setUserName(removeNonBmpUnicode(userInfoBean.getNickname()));
                         user.setImagePath(userInfoBean.getAvatar().getAvatarURL100());
                         userService.update(user);
                     }
-                    logger.info("QQ用户登录成功！"+user);
+                    logger.info("QQ用户登录成功！" + user);
                     session.setAttribute("loginUser", user);
                     return "redirect:/index";
                 } else {
@@ -216,11 +222,11 @@ public class LoginController extends BaseController {
     }
 
     /**
+     * @return java.lang.String 返回处理之后的网名
      * @Description 处理掉QQ网名中的特殊表情
      * @Author xw
      * @Date 18:26 2020/2/25
      * @Param [str]
-     * @return java.lang.String 返回处理之后的网名
      **/
     public String removeNonBmpUnicode(String str) {
         if (str == null) {
@@ -234,11 +240,11 @@ public class LoginController extends BaseController {
     }
 
     /**
+     * @return java.lang.String
      * @Description 退出登录，清空session
      * @Author xw
      * @Date 18:26 2020/2/25
      * @Param []
-     * @return java.lang.String
      **/
     @GetMapping("/logout")
     public String logout() {
