@@ -142,16 +142,13 @@
 <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
 <script>
 	$(function () {
-		// $('.card').dblclick(function () {
-		// let id = $(this).children("td").children("span").html();
-		// var location = window.location.href;
-		// let strings = location.split("?");
-		// if (id != ""){
-		// 	window.location.href = strings[0]+"?fId="+id;
-		// }else{
-		// 	return;
-		// }
-		// });
+		$('.empty-space').dblclick(function () {
+			// 双击导航栏面包屑,返回上一层链接元素并模拟点击
+			var goBackLink = document.querySelector('a[title="返回上一层"]');
+			if (goBackLink) {
+				goBackLink.click();
+			}
+		});
 		$('.folders').dblclick(function () {
 			let id = $(this).children("td").children("span").html();
 			var location = window.location.href;
@@ -333,7 +330,8 @@
 		]
 
 	});
-	// $(".card").contextMenu({
+
+	// $(".card-body").contextMenu({
 	// 	width: 100, // width
 	// 	itemHeight: 30, // 菜单项height
 	// 	bgColor: "#fff", // 背景颜色
