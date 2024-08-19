@@ -1,9 +1,18 @@
 # moti-cloud
+
 莫提网盘-v2.0：适合初学者，喜欢的小伙伴可以点上面的Star支持一下嘛！
 
 [下载莫提网盘-v1.0](https://github.com/373675032/moti-cloud/releases)
 
 [网盘地址](http://xuewei.world/moti-cloud/)          [视频演示](https://www.bilibili.com/video/BV1p7411y7aQ)
+
+
+
+
+
+[GitHub - foyuexiaoerbuyu/moti-cloud: 莫提网盘（moti-cloud）是一个基于 SpringBoot 开发的标准 Java Web 项目。存储模式支持 FTP、阿里云 OSS 对象存储。项目选题新颖，完成度较高，前后端不分离的单体架构，非常适合刚刚接触学习 SpringBoot 的技术小白学习，也非常适合学校中的项目答辩或者毕业设计。喜欢的话记得帮忙点亮 Star，不求打赏，免费分享，只求你一个免费的👍，你的支持是我做下去的动力。](https://github.com/foyuexiaoerbuyu/moti-cloud.git)](https://github.com/foyuexiaoerbuyu/moti-cloud.git)
+
+
 
 ### 注意
 
@@ -51,7 +60,6 @@
 
 [怎样引入QQ登录](https://www.bilibili.com/video/av90710722)
 
-
 [使用Docker部署SpringBoot应用](https://www.bilibili.com/video/av88690709)
 
 ### 欢迎关注我的B站账号
@@ -59,8 +67,6 @@
 [我是莫提](https://space.bilibili.com/301320288)
 
 [我的个人博客](http://xuewei.world)
-
-
 
 ### 写在最后
 
